@@ -51,6 +51,7 @@ export interface EditorProps {
   onSelectionChange?: (data: SelectionChangeData) => void;
   onTextChange?: (data: TextChangeData) => void;
   onHtmlChange?: (data: HtmlChangeData) => void;
+  onMentionSource?: (data: any) => void;
   onEditorChange?: (data: EditorChangeData) => void;
   onDimensionsChange?: (data: DimensionsChangeData) => void;
   webview?: WebViewProps;
@@ -87,6 +88,7 @@ export default class QuillEditor extends React.Component<
       onDimensionsChange,
       onBlur,
       onFocus,
+      onMentionSource,
     } = this.props;
     if (onSelectionChange) {
       this.on('selection-change', onSelectionChange);
@@ -99,6 +101,9 @@ export default class QuillEditor extends React.Component<
     }
     if (onHtmlChange) {
       this.on('html-change', onHtmlChange);
+    }
+    if (onMentionSource) {
+      this.on('mention-source', onMentionSource);
     }
     if (onDimensionsChange) {
       this.on('dimensions-change', onDimensionsChange);
@@ -225,6 +230,11 @@ export default class QuillEditor extends React.Component<
           response.resolve(message.data);
           this._promises = this._promises.filter((x) => x.key !== message.key);
         }
+        break;
+      case 'mention-source':
+        this._handlers
+          .filter((x) => x.event === message.type)
+          .forEach((item) => item.handler(message.data));
         break;
       default:
         // Allow catching messages using the passed webview props

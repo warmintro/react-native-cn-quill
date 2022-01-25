@@ -6,7 +6,8 @@ export type EditorEventType =
   | 'html-change'
   | 'dimensions-change'
   | 'blur'
-  | 'focus';
+  | 'focus'
+  | 'mention-source';
 
 export interface SelectionChangeData {
   range: { index: number; length: number } | null;
@@ -45,6 +46,7 @@ export type SelectionChangeHandler = (data: SelectionChangeData) => void;
 export type FormatChangeHandler = (data: FormatChangeData) => void;
 export type HtmlChangeHandler = (data: HtmlChangeData) => void;
 export type DimensionsChangeHandler = (data: DimensionsChangeData) => void;
+export type MentionSourceHandler = (data: any) => void;
 
 export type EditorEventHandler =
   | EditorChangeHandler
@@ -52,4 +54,5 @@ export type EditorEventHandler =
   | SelectionChangeHandler
   | FormatChangeHandler
   | HtmlChangeHandler
-  | DimensionsChangeHandler;
+  | DimensionsChangeHandler
+  | MentionSourceHandler;
