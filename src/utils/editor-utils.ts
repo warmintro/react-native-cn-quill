@@ -6,7 +6,7 @@ import {
   quill_bubble_css,
   quill_snow_css,
   quill_js,
-  quill_mention_js
+  quill_mention_js,
 } from '../constants/editor';
 
 export const getFontName = (font: string) => {

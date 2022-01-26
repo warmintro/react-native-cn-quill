@@ -392,7 +392,6 @@ var MentionBlot = /*#__PURE__*/function (_Embed) {
     value: function create(data) {
       var node = _get(_getPrototypeOf(MentionBlot), "create", this).call(this);
       if (data.link) {
-        alert(JSON.stringify(data))
         var link = document.createElement("a")
         link.href = data.link
         var denotationChar = document.createElement("span");
