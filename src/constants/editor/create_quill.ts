@@ -5,7 +5,7 @@ export const create_quill = (
   placeholder: string,
   theme: 'snow' | 'bubble',
   customFonts: Array<string> = [],
-  customJS: string,
+  customJS: string
 ) => {
   let font = '';
   if (customFonts.length > 0) {
@@ -35,31 +35,29 @@ export const create_quill = (
       else console.log(message)
   }
 
-  try {
-    require("quill-mention");
-  } catch (e) {
-    alert(e.message || '')
+  const mention = {
+    source: function(searchTerm, renderList, mentionChar) {
+      const eventName = 'mention-change'
+
+      var getEditorChange = JSON.stringify({
+        type: eventName,
+        data: { eventName, args: { searchTerm, mentionChar } }
+      });
+
+      sendMessage(getEditorChange);
+    }
   }
 
   var quill = new Quill('#${id}', {
     modules: {
-      toolbar: ${toolbar} ,
-      ${clipboardModule},
-      mention: {
-        allowedChars: /^[A-Za-z\sÅÄÖåäö]*$/,
-        mentionDenotationChars: ["@", "#"],
-        source: function(searchTerm, renderList, mentionChar) {
-          var getEditorChange = JSON.stringify({
-            type: 'mention-source',
-            data: { eventName: 'mention-source', args: { searchTerm, renderList, mentionChar } }
-          });
-          sendMessage(getEditorChange);
-        }
-      }
+      mention: mention,
+      toolbar: ${toolbar},
+      ${clipboardModule}
     },
     placeholder: '${placeholder}',
     theme: '${theme}'
   });
+
   </script>
   `;
 };

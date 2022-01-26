@@ -6,6 +6,7 @@ import {
   quill_bubble_css,
   quill_snow_css,
   quill_js,
+  quill_mention_js
 } from '../constants/editor';
 
 export const getFontName = (font: string) => {
@@ -81,7 +82,6 @@ export const createHtml = (args: CreateHtmlArgs = Inital_Args) => {
       })
       .join('\n')
   }
-
   </head>
   <body>
   <div id="${args.containerId}">
@@ -90,6 +90,7 @@ export const createHtml = (args: CreateHtmlArgs = Inital_Args) => {
     </div>
   </div>
   ${quill_js(args.libraries === 'cdn')}
+  ${quill_mention_js()}
   ${create_quill(
     args.editorId,
     args.toolbar,

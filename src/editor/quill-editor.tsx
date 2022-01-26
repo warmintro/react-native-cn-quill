@@ -51,9 +51,9 @@ export interface EditorProps {
   onSelectionChange?: (data: SelectionChangeData) => void;
   onTextChange?: (data: TextChangeData) => void;
   onHtmlChange?: (data: HtmlChangeData) => void;
-  onMentionSource?: (data: any) => void;
   onEditorChange?: (data: EditorChangeData) => void;
   onDimensionsChange?: (data: DimensionsChangeData) => void;
+  onMentionChange?: (data: any) => void;
   webview?: WebViewProps;
   onBlur?: () => void;
   onFocus?: () => void;
@@ -86,9 +86,9 @@ export default class QuillEditor extends React.Component<
       onTextChange,
       onHtmlChange,
       onDimensionsChange,
+      onMentionChange,
       onBlur,
       onFocus,
-      onMentionSource,
     } = this.props;
     if (onSelectionChange) {
       this.on('selection-change', onSelectionChange);
@@ -102,11 +102,11 @@ export default class QuillEditor extends React.Component<
     if (onHtmlChange) {
       this.on('html-change', onHtmlChange);
     }
-    if (onMentionSource) {
-      this.on('mention-source', onMentionSource);
-    }
     if (onDimensionsChange) {
       this.on('dimensions-change', onDimensionsChange);
+    }
+    if (onMentionChange) {
+      this.on('mention-change', onMentionChange);
     }
     if (onBlur) {
       this.on('blur', onBlur);
@@ -212,6 +212,7 @@ export default class QuillEditor extends React.Component<
       case 'selection-change':
       case 'html-change':
       case 'editor-change':
+      case 'mention-change':
       case 'blur':
       case 'focus':
         this._handlers
@@ -230,11 +231,6 @@ export default class QuillEditor extends React.Component<
           response.resolve(message.data);
           this._promises = this._promises.filter((x) => x.key !== message.key);
         }
-        break;
-      case 'mention-source':
-        this._handlers
-          .filter((x) => x.event === message.type)
-          .forEach((item) => item.handler(message.data));
         break;
       default:
         // Allow catching messages using the passed webview props
@@ -318,6 +314,10 @@ export default class QuillEditor extends React.Component<
 
   insertText = (index: number, text: string, formats?: Record<string, any>) => {
     this.post({ command: 'insertText', index, text, formats });
+  };
+
+  insertMention = (data: any) => {
+    this.post({ command: 'insertMention', data });
   };
 
   setContents = (delta: any) => {

@@ -4,3 +4,4 @@ export { editor_js } from './editor_js';
 export { quill_js } from './quill_js';
 export { quill_snow_css } from './quill_snow_css';
 export { quill_bubble_css } from './quill_bubble_css';
+export { quill_mention_js } from './quill_mention_js';

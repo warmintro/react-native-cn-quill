@@ -91,6 +91,10 @@ export const editor_js = `
     quill.insertText(index, text, formats);
   }
 
+  var insertMention = function ({ id = '', value = '', denotationChar = '@', link = '' }) {
+    quill.getModule('mention').insertItem({ id, value, denotationChar, link });
+  }
+
   var setContents = function (delta) {
     quill.setContents(delta);
   }
@@ -180,6 +184,9 @@ export const editor_js = `
         break;
       case 'insertText':
         insertText(msg.index, msg.text, msg.formats);
+        break;
+      case 'insertMention':
+        insertMention(msg.data);
         break;
       case 'setContents':
         setContents(msg.delta);
