@@ -53,7 +53,6 @@ export const quill_video_js = () => `
       }
 
       static sanitize(url) {
-        alert(sanitizeUrl(url, PROTOCOL_WHITELIST) ? url : SANITIZED_URL)
         return sanitizeUrl(url, PROTOCOL_WHITELIST) ? url : SANITIZED_URL;
       }
 
@@ -75,4 +74,4 @@ export const quill_video_js = () => `
 
     Quill.register(VideoBlot);
   </script>
-`
+ `;
