@@ -1138,6 +1138,9 @@ var Mention = /*#__PURE__*/function () {
           }, mentionChar);
         } else {
           if (this.existingSourceExecutionToken) {
+            if (!this.existingSourceExecutionToken.abandoned) {
+              this.options.source('', null, '')
+            }
             this.existingSourceExecutionToken.abandoned = true;
           }
 
@@ -1145,6 +1148,10 @@ var Mention = /*#__PURE__*/function () {
         }
       } else {
         if (this.existingSourceExecutionToken) {
+          if (!this.existingSourceExecutionToken.abandoned) {
+            this.options.source('', null, '')
+          }
+
           this.existingSourceExecutionToken.abandoned = true;
         }
 
