@@ -6,3 +6,4 @@ export { quill_snow_css } from './quill_snow_css';
 export { quill_bubble_css } from './quill_bubble_css';
 export { quill_mention_js } from './quill_mention_js';
 export { quill_video_js } from './quill_video_js';
+export { quill_link_js } from './quill_link_js';

@@ -8,6 +8,7 @@ import {
   quill_js,
   quill_mention_js,
   quill_video_js,
+  quill_link_js,
 } from '../constants/editor';
 
 export const getFontName = (font: string) => {
@@ -93,6 +94,7 @@ export const createHtml = (args: CreateHtmlArgs = Inital_Args) => {
   ${quill_js(args.libraries === 'cdn')}
   ${quill_mention_js()}
   ${quill_video_js()}
+  ${quill_link_js()}
   ${create_quill(
     args.editorId,
     args.toolbar,
