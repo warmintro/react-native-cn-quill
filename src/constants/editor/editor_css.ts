@@ -69,6 +69,7 @@ body { overflow-y: hidden; -webkit-overflow-scrolling: touch;background-color: $
 
 .ql-container > .ql-editor.ql-blank::before{
   color: ${placeholder};
+  font-style: normal;
 }
 
 ${fontCss}
