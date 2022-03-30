@@ -716,15 +716,14 @@ var Mention = /*#__PURE__*/function () {
         insertAtPos = this.cursorPos;
       }
 
-      var text = data.denotationChar + data.value;
-      this.quill.insertText(insertAtPos, text, { attachment: { text, url: data.link } });
+      this.quill.insertEmbed(insertAtPos, this.options.blotName, render, Quill__default["default"].sources.USER);
 
       if (this.options.spaceAfterInsert) {
-        this.quill.insertText(insertAtPos + text.length, " ", Quill__default["default"].sources.USER); // setSelection here sets cursor position
+        this.quill.insertText(insertAtPos + 1, " ", Quill__default["default"].sources.USER); // setSelection here sets cursor position
 
-        this.quill.setSelection(insertAtPos + text.length + 1, Quill__default["default"].sources.USER);
+        this.quill.setSelection(insertAtPos + 2, Quill__default["default"].sources.USER);
       } else {
-        this.quill.setSelection(insertAtPos + text.length, Quill__default["default"].sources.USER);
+        this.quill.setSelection(insertAtPos + 1, Quill__default["default"].sources.USER);
       }
 
       this.hideMentionList();
