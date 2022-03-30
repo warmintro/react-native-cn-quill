@@ -1,6 +1,6 @@
 export const quill_link_js = () => `
   <script>
-    var Embed = Quill.import('blots/embed')
+    var Embed = Quill.import('blots/inline')
 
     class AttachmentBlot extends Embed {
       static create(value) {
@@ -8,7 +8,6 @@ export const quill_link_js = () => `
 
         node.setAttribute('href', value.url)
         node.setAttribute('target', '_blank')
-        node.innerText = value.text
 
         return node
       }
@@ -23,7 +22,7 @@ export const quill_link_js = () => `
       }
     }
     AttachmentBlot.blotName = 'attachment'
-    AttachmentBlot.tagName = 'A'
+    AttachmentBlot.tagName = 'a'
     AttachmentBlot.className = 'attachment'
 
     Quill.register(AttachmentBlot)
