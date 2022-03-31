@@ -303,6 +303,13 @@ function hasValidMentionCharIndex(mentionCharIndex, text, isolateChar) {
   return false;
 }
 
+function hasSpaceBeforeMentionChar(mentionCharIndex, text, isolateChar) {
+    if (mentionCharIndex > 0) {
+        return text[mentionCharIndex - 1] === ' ';
+    }
+    return true;
+}
+
 var Embed = Quill__default["default"]["import"]("blots/embed");
 
 var MentionBlot = /*#__PURE__*/function (_Embed) {
@@ -1111,6 +1118,8 @@ var Mention = /*#__PURE__*/function () {
       var _getMentionCharIndex = getMentionCharIndex(textBeforeCursor, this.options.mentionDenotationChars),
           mentionChar = _getMentionCharIndex.mentionChar,
           mentionCharIndex = _getMentionCharIndex.mentionCharIndex;
+
+      if (!hasSpaceBeforeMentionChar(mentionCharIndex, textBeforeCursor)) return;
 
       if (hasValidMentionCharIndex(mentionCharIndex, textBeforeCursor, this.options.isolateCharacter)) {
         var mentionCharPos = this.cursorPos - (textBeforeCursor.length - mentionCharIndex);
