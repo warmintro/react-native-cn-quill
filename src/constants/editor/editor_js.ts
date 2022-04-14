@@ -91,8 +91,8 @@ export const editor_js = `
     quill.insertText(index, text, formats);
   }
 
-  var insertMention = function ({ id = '', value = '', denotationChar = '@', link = '' }) {
-    quill.getModule('mention').insertItem({ id, value, denotationChar, link });
+  var insertMention = function ({ id = '', value = '', denotationChar = '@', link = '', isAttachment = false }) {
+    quill.getModule('mention').insertItem({ id, value, denotationChar, link, isAttachment });
   }
 
   var setContents = function (delta) {

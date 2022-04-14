@@ -723,14 +723,26 @@ var Mention = /*#__PURE__*/function () {
         insertAtPos = this.cursorPos;
       }
 
-      this.quill.insertEmbed(insertAtPos, this.options.blotName, render, Quill__default["default"].sources.USER);
+      if (data.isAttachment) {
+        const text = '@' + data.value
+        this.quill.insertText(insertAtPos, text, { attachment: { url: data.link, text }}, Quill__default["default"].sources.USER);
+        if (this.options.spaceAfterInsert) {
+          this.quill.insertText(insertAtPos + text.length, " ", Quill__default["default"].sources.USER); // setSelection here sets cursor position
 
-      if (this.options.spaceAfterInsert) {
-        this.quill.insertText(insertAtPos + 1, " ", Quill__default["default"].sources.USER); // setSelection here sets cursor position
-
-        this.quill.setSelection(insertAtPos + 2, Quill__default["default"].sources.USER);
+          this.quill.setSelection(insertAtPos + text.length + 1, Quill__default["default"].sources.USER);
+        } else {
+          this.quill.setSelection(insertAtPos + text.length, Quill__default["default"].sources.USER);
+        }
       } else {
-        this.quill.setSelection(insertAtPos + 1, Quill__default["default"].sources.USER);
+        this.quill.insertEmbed(insertAtPos, this.options.blotName, render, Quill__default["default"].sources.USER);
+
+        if (this.options.spaceAfterInsert) {
+          this.quill.insertText(insertAtPos + 1, " ", Quill__default["default"].sources.USER); // setSelection here sets cursor position
+
+          this.quill.setSelection(insertAtPos + 2, Quill__default["default"].sources.USER);
+        } else {
+          this.quill.setSelection(insertAtPos + 1, Quill__default["default"].sources.USER);
+        }
       }
 
       this.hideMentionList();
